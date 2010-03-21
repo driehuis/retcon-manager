@@ -26,4 +26,8 @@ EM.run do
   EventMachine::add_periodic_timer 60 do
     Retcon::BackupServers.start_queued
   end
+  
+  EventMachine::add_periodic_timer 1 do
+    Retcon::BackupJobs.wakeup
+  end
 end
