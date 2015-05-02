@@ -12,10 +12,10 @@ DaemonKit::Initializer.run do |config|
   config.daemon_name = 'retcon-manager'
 
   # Force the daemon to be killed after X seconds from asking it to
-  # config.force_kill_wait = 30
+  config.force_kill_wait = 10
 
   # Log backraces when a thread/daemon dies (Recommended)
-  # config.backtraces = true
+  config.backtraces = true
 
   # Configure the safety net (see DaemonKit::Safety)
   # config.safety_net.handler = :mail # (or :hoptoad )

@@ -12,20 +12,11 @@ DaemonKit::Application.running! do |config|
   config.trap( 'TERM', Proc.new { puts 'Going down'; exit } )
 end
 
-def load_mapper_opts
-  YAML::load(ERB.new(IO.read(RAILS_ROOT+"/config/nanite/mapper.yml")).result)[DAEMON_ENV || "development"]
-end
-
 # Sample loop to show process
 EM.run do
   
-  opts = load_mapper_opts
-  opts.merge!(:offline_failsafe => true)
-  $stderr.puts "Starting Nanite mapper..."
-  Nanite.start_mapper(opts)
-  
   EventMachine::add_periodic_timer 600 do
-    Retcon::BackupServers.update_disk_space
+   # Retcon::BackupServers.update_disk_space
   end
   
   EventMachine::add_periodic_timer 60 do
@@ -34,5 +25,9 @@ EM.run do
   
   EventMachine::add_periodic_timer 60 do
     Retcon::BackupServers.start_queued
+  end
+  
+  EventMachine::add_periodic_timer 1 do
+    Retcon::BackupJobs.wakeup
   end
 end
