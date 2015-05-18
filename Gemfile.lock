@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    daemon-kit (0.3.2)
+      eventmachine (>= 0.12.10)
+      thor
+    eventmachine (1.0.7)
+    thor (0.19.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  daemon-kit
